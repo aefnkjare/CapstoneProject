@@ -1,6 +1,8 @@
 package com.iv;
 
+import java.time.*;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class Reports {
@@ -43,12 +45,15 @@ public class Reports {
             }
         }while(!reportInput.equalsIgnoreCase("5"));
     }
-    public static void monthToDate(){
-        String userInput = "2002-10-17";
-        LocalDate birthDay = LocalDate.parse(userInput);
+    static void monthToDate(){
+        String userInput = "08-03-2000 08:00:00 ";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm:ss");
+        LocalDateTime timeTravelDate = LocalDateTime.parse(userInput, formatter);
     }
-    public static void previousMonth(){
-
+    public static String previousMonth(){
+        String userInput = "2023-03-01";
+        LocalDate latePayment = LocalDate.parse(userInput);
+        return userInput;
     }
     public static void previousYear(){
 
