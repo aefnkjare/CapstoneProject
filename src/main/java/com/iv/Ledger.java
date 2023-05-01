@@ -52,7 +52,4 @@ public class Ledger {
     public static void depositEntries(){
 
     }
-    public static void home(){
-
-    }
 }

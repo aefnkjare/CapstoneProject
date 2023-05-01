@@ -13,6 +13,20 @@ public class Main {
 
         String userInput;
 
+        Vendor[] vendors = new Vendor[9];
+
+        vendors[0] = new Vendor("Greg");
+        vendors[1] = new Vendor("Xavier");
+        vendors[2] = new Vendor("Pavel");
+        vendors[3] = new Vendor("Salha");
+        vendors[4] = new Vendor("RayShawn");
+        vendors[5] = new Vendor("Jada");
+        vendors[6] = new Vendor("Seolah");
+        vendors[7] = new Vendor("Demetrius");
+        vendors[8] = new Vendor("Kaya");
+
+        int totalNumOfVendors = 9;
+
         do {
             System.out.println("Please choose an option: ");
             System.out.println("\t 1: Add Deposit");

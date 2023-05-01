@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class Reports {
-    public static void reports(){
+    public static void reports() {
         String reportInput;
 
         Scanner scanner = new Scanner(System.in);
@@ -44,26 +44,59 @@ public class Reports {
                 default:
                     System.out.println("Invalid input you Bozo, put in the right number next time.");
             }
-        }while(!reportInput.equalsIgnoreCase("6"));
+        } while (!reportInput.equalsIgnoreCase("6"));
     }
-    static void monthToDate(){
-        String userInput = "08-03-2000 08:00:00 ";
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm:ss");
-        LocalDateTime timeTravelDate = LocalDateTime.parse(userInput, formatter);
+
+    static void monthToDate() {
+        LocalDate userInput = LocalDate.of(2023, 5,1);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        String formattedDate = userInput.format(formatter);
+        System.out.println(formattedDate);
     }
-    public static String previousMonth(){
-        String userInput = "2023-03-01";
-        LocalDate latePayment = LocalDate.parse(userInput);
-        return userInput;
+
+    public static void previousMonth() {
+        LocalDate userInput = LocalDate.of(2023, 3,1);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        String formattedDate = userInput.format(formatter);
+        System.out.println(formattedDate);
+//        LocalDate latePayment = LocalDate.parse(userInput);
+//        return userInput;
     }
-    public static void previousYear(){
+
+    public static void previousYear() {
+        LocalDate userInput = LocalDate.of(2022, 10,9);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        String formattedDate = userInput.format(formatter);
+        System.out.println(formattedDate);
+    }
+
+    public static void yearToDate() {
+        LocalDate userInput = LocalDate.of(2023, 1,19);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        String formattedDate = userInput.format(formatter);
+        System.out.println(formattedDate);
+    }
+
+    public static void searchByVendor() {
+
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Please type the name of the vendor you would like to search up. \n Name: ");
+        String userInput = scanner.next();
 
     }
-    public static void yearToDate(){
-
-    }
-    public static void searchByVendor(){
-
-    }
-    public static void back(){}
 }
+class Vendor{
+    private String name;
+
+    public Vendor(String name){
+        this.name = name;
+    }
+    public String getName(){
+        return name;
+    }
+    public void setName(String name){
+        this.name = name;
+    }
+}
+
