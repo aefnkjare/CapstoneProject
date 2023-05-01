@@ -16,8 +16,9 @@ public class Reports {
             System.out.println("\t 1: Month to date reports");
             System.out.println("\t 2: Previous month reports");
             System.out.println("\t 3: Year to date reports");
-            System.out.println("\t 4: Search by Vendor");
-            System.out.println("\t 5: BACK");
+            System.out.println("\t 4: Previous year reports");
+            System.out.println("\t 5: Search by Vendor");
+            System.out.println("\t 6: BACK");
 
             reportInput = scanner.nextLine();
 
@@ -43,7 +44,7 @@ public class Reports {
                 default:
                     System.out.println("Invalid input you Bozo, put in the right number next time.");
             }
-        }while(!reportInput.equalsIgnoreCase("5"));
+        }while(!reportInput.equalsIgnoreCase("6"));
     }
     static void monthToDate(){
         String userInput = "08-03-2000 08:00:00 ";
