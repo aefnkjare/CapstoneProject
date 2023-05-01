@@ -1,5 +1,6 @@
 package com.iv;
 
+import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Reports {
@@ -43,7 +44,8 @@ public class Reports {
         }while(!reportInput.equalsIgnoreCase("5"));
     }
     public static void monthToDate(){
-
+        String userInput = "2002-10-17";
+        LocalDate birthDay = LocalDate.parse(userInput);
     }
     public static void previousMonth(){
 

@@ -10,8 +10,6 @@ public class Ledger {
 
         String ledgerInput;
 
-        String reports;
-
         Scanner scanner = new Scanner(System.in);
 
         do {

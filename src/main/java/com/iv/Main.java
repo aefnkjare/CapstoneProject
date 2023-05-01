@@ -44,7 +44,7 @@ public class Main {
         System.out.println("Please provide how much you are intending to deposit: \n Amount: ");
         String depositAmountAdd = scanner.nextLine();
         try {
-            FileWriter depositFiles = new FileWriter("./src/main/java/com/iv/Deposits.csv");
+            FileWriter depositFiles = new FileWriter("./src/main/java/com/iv/Transactions.csv");
             BufferedWriter bufferedWriter = new BufferedWriter(depositFiles);
 
             bufferedWriter.write(depositAmountAdd);
