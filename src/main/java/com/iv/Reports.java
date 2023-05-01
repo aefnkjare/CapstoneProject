@@ -10,11 +10,11 @@ public class Reports {
 
         do {
             System.out.println("Please choose an option: ");
-            System.out.println("\t 1: Display All Entries");
-            System.out.println("\t 2: Display Deposit Entries");
-            System.out.println("\t 3: Display Payment Entries");
-            System.out.println("\t 4: Reports");
-            System.out.println("\t 5: Return Home");
+            System.out.println("\t 1: Month to date reports");
+            System.out.println("\t 2: Previous month reports");
+            System.out.println("\t 3: Year to date reports");
+            System.out.println("\t 4: Search by Vendor");
+            System.out.println("\t 5: BACK");
 
             reportInput = scanner.nextLine();
 
@@ -40,7 +40,7 @@ public class Reports {
                 default:
                     System.out.println("Invalid input you Bozo, put in the right number next time.");
             }
-        }while(!reportInput.equalsIgnoreCase("6"));
+        }while(!reportInput.equalsIgnoreCase("5"));
     }
     public static void monthToDate(){
 

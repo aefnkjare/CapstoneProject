@@ -26,20 +26,34 @@ public class Ledger {
 
             switch (ledgerInput) {
                 case "1":
-                    Main.addDeposit();
+                    allEntries();
                     break;
                 case "2":
-                    Main.makePayment();
+                    depositEntries();
                     break;
                 case "3":
-                    ledger();
+                    negativeEntries();
                     break;
                 case "4":
                     Reports.reports();
                     break;
+                case "5":
+                    home();
                 default:
                     System.out.println("Invalid input you Bozo, put in the right number next time.");
             }
         } while (!ledgerInput.equalsIgnoreCase("5"));
+    }
+    public static void allEntries(){
+
+    }
+    public static void negativeEntries(){
+
+    }
+    public static void depositEntries(){
+
+    }
+    public static void home(){
+
     }
 }
