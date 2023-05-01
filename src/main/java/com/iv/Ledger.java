@@ -3,6 +3,7 @@ package com.iv;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ledger {
@@ -36,7 +37,7 @@ public class Ledger {
                     Reports.reports();
                     break;
                 case "5":
-                    home();
+                    System.out.println("Heading back to the Home Page.");
                 default:
                     System.out.println("Invalid input you Bozo, put in the right number next time.");
             }

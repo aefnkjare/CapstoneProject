@@ -38,7 +38,7 @@ public class Reports {
                     searchByVendor();
                     break;
                 case "6":
-                    back();
+                    System.out.println("I guess you can leave me all alone by myself then");
                     break;
                 default:
                     System.out.println("Invalid input you Bozo, put in the right number next time.");
@@ -64,7 +64,5 @@ public class Reports {
     public static void searchByVendor(){
 
     }
-    public static void back(){
-
-    }
+    public static void back(){}
 }
