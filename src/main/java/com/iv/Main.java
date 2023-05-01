@@ -1,5 +1,6 @@
 package com.iv;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -14,10 +15,10 @@ public class Main {
 
         do {
             System.out.println("Please choose an option: ");
-            System.out.println("\t D: Add Deposit");
-            System.out.println("\t P: Make Payment");
-            System.out.println("\t L: Ledger");
-            System.out.println("\t X: Exit");
+            System.out.println("\t 1: Add Deposit");
+            System.out.println("\t 2: Make Payment");
+            System.out.println("\t 3: Ledger");
+            System.out.println("\t 4: Exit");
             userInput = scanner.nextLine();
 
             switch (userInput) {
@@ -28,7 +29,7 @@ public class Main {
                 makePayment();
                 break;
             case "3":
-                ledger();
+                Ledger.ledger();
                 break;
             case "4":
                 System.out.println("Exiting the application.");
@@ -39,15 +40,24 @@ public class Main {
         }while(!userInput.equalsIgnoreCase("4"));
     }
     public static void addDeposit(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Please provide how much you are intending to deposit: \n Amount: ");
+        String depositAmountAdd = scanner.nextLine();
+        try {
+            FileWriter depositFiles = new FileWriter("./src/main/java/com/iv/Deposits.csv");
+            BufferedWriter bufferedWriter = new BufferedWriter(depositFiles);
 
+            bufferedWriter.write(depositAmountAdd);
+
+            for(int i=0;i<100_000;i++){
+                bufferedWriter.write(i);
+            }
+            String input;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     public static void makePayment(){
-
-    }
-    public static void ledger(){
-
-    }
-    public static void reports(){
 
     }
 }
