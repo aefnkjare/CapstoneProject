@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 public class Main {
     static Scanner scanner = new Scanner(System.in);
@@ -100,6 +101,62 @@ public class Main {
             e.printStackTrace();
         }
     }
+    public class Ledger{
+        public String date;
+        public String time;
+        public String desc;
+        public String vendor;
+        public float amount;
+
+        public Ledger(String date, String time, String desc, String vendor, float amount) {
+            this.date = date;
+            this.time = time;
+            this.desc = desc;
+            this.vendor = vendor;
+            this.amount = amount;
+        }
+
+        public String getDate() {
+            return date;
+        }
+
+        public void setDate(String date) {
+            this.date = date;
+        }
+
+        public String getTime() {
+            return time;
+        }
+
+        public void setTime(String time) {
+            this.time = time;
+        }
+
+        public String getDesc() {
+            return desc;
+        }
+
+        public void setDesc(String desc) {
+            this.desc = desc;
+        }
+
+        public String getVendor() {
+            return vendor;
+        }
+
+        public void setVendor(String vendor) {
+            this.vendor = vendor;
+        }
+
+        public float getAmount() {
+            return amount;
+        }
+
+        public void setAmount(float amount) {
+            this.amount = amount;
+        }
+    }
+
     static void ledger() {
 
         String ledgerInput;
@@ -138,8 +195,39 @@ public class Main {
         } while (!ledgerInput.equalsIgnoreCase("5"));
     }
 
-        public static void allEntries(){
+        public void allEntries(){
+            try {
+                FileReader transactions = new FileReader("./src/main/java/com/iv/Transactions.txt");
+                BufferedReader bufferedReader = new BufferedReader(transactions);
 
+                String input;
+
+                while((input = bufferedReader.readLine()) != null){
+                    /// input split ||
+                    String[] splitInput = input.split(Pattern.quote("|"));
+
+                    String date = splitInput[0];
+                    String time = splitInput[1];
+                    String description = splitInput[2];
+                    String vendor = splitInput[3];
+                    float amount = Float.parseFloat(splitInput[4]);
+
+                     Ledger ledgerItem = new Ledger(date, time, description, vendor, amount); // [190, Madison Brown, 40, 17.50]
+
+                    System.out.printf("Item: %s, %s, %s, %s, $%.2f\n",
+                            ledgerItem.getDate(),
+                            ledgerItem.getTime(),
+                            ledgerItem.getDesc(),
+                            ledgerItem.getVendor(),
+                            ledgerItem.getAmount()
+                            );
+
+//                System.out.println(splitInput[]);
+                }
+                bufferedReader.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         public static void negativeEntries(){
 
