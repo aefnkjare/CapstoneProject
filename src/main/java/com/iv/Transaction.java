@@ -1,6 +1,6 @@
 package com.iv;
 
-public class Transactions {
+public class Transaction {
     private float date;
     private float time;
     private String description;
@@ -10,7 +10,7 @@ public class Transactions {
     // Constructors
 
 
-    public Transactions(float date, float time, String description, String vendor, float price) {
+    public Transaction(float date, float time, String description, String vendor, float price) {
         this.date = date;
         this.time = time;
         this.description = description;
