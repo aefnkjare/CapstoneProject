@@ -2,6 +2,7 @@ package com.iv;
 
 import java.io.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.util.regex.Pattern;
@@ -97,7 +98,7 @@ public class Ledger {
     }
 
     public void makePayment() {
-        System.out.println("Please provide the date of your deposit(yyyy-MM-dd): \n Answer: ");
+        System.out.println("Please provide the date of your deposit(yyyy-MM-DD): \n Answer: ");
         String date = scanner.nextLine();
 
         System.out.println("Please provide the time of your deposit(hh:MM:ss): \n Answer: ");
@@ -162,8 +163,7 @@ public class Ledger {
             }
         } while (!ledgerInput.equalsIgnoreCase("5"));
     }
-
-    public void allEntries() {
+    public void printEntries(String filter, LocalDate start, LocalDate end) {
         try {
             FileReader transactions = new FileReader("./src/main/java/com/iv/Transactions.txt");
             BufferedReader bufferedReader = new BufferedReader(transactions);
@@ -182,13 +182,52 @@ public class Ledger {
 
                 com.iv.Ledger ledgerItem = new com.iv.Ledger(date, time, description, vendor, amount); // [190, Madison Brown, 40, 17.50]
 
-                System.out.printf("Item: %s, %s, %s, %s, $%.2f\n",
-                        ledgerItem.getDate(),
-                        ledgerItem.getTime(),
-                        ledgerItem.getDesc(),
-                        ledgerItem.getVendor(),
-                        ledgerItem.getAmount()
-                );
+                if(filter.equals("negative")&&amount<0){
+                    System.out.printf("Item: %s, %s, %s, %s, $%.2f\n",
+                            ledgerItem.getDate(),
+                            ledgerItem.getTime(),
+                            ledgerItem.getDesc(),
+                            ledgerItem.getVendor(),
+                            ledgerItem.getAmount()
+                    );
+                    continue;
+                }
+                if(filter.equals("positive")&&amount>0) {
+                    System.out.printf("Item: %s, %s, %s, %s, $%.2f\n",
+                            ledgerItem.getDate(),
+                            ledgerItem.getTime(),
+                            ledgerItem.getDesc(),
+                            ledgerItem.getVendor(),
+                            ledgerItem.getAmount()
+                    );
+                    continue;
+                }
+                if(filter.equals("all")) {
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                    LocalDate transactionDate = LocalDate.parse(date, formatter);
+                    if(start!=null && end!=null) {
+
+                        if ((transactionDate.isAfter(start)||transactionDate.isEqual(start))
+                                && (transactionDate.isBefore(end)||transactionDate.isEqual(end))) {
+                            System.out.printf("Item: %s, %s, %s, %s, $%.2f\n",
+                                    ledgerItem.getDate(),
+                                    ledgerItem.getTime(),
+                                    ledgerItem.getDesc(),
+                                    ledgerItem.getVendor(),
+                                    ledgerItem.getAmount()
+                            );
+                        }
+                        continue;
+
+                    }
+                    System.out.printf("Item: %s, %s, %s, %s, $%.2f\n",
+                            ledgerItem.getDate(),
+                            ledgerItem.getTime(),
+                            ledgerItem.getDesc(),
+                            ledgerItem.getVendor(),
+                            ledgerItem.getAmount()
+                    );
+                }
 
 //                System.out.println(splitInput[]);
             }
@@ -196,14 +235,18 @@ public class Ledger {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        System.out.println("");
     }
+        public void allEntries () {
+            printEntries("all", null,null);
+        }
 
     public void negativeEntries() {
-
+        printEntries("negative",null, null);
     }
 
     public void depositEntries() {
-
+        printEntries("positive",null ,null);
     }
 
     public void reports() {
@@ -250,35 +293,50 @@ public class Ledger {
             }
         } while (!reportInput.equalsIgnoreCase("6"));
     }
+    public String zeroPaddedMonthDay(int monthDay){
+        if (monthDay<10){
+            return "0"+monthDay;
+        }
+        return ""+monthDay;
+    }
 
     public void monthToDate() {
-        LocalDate userInput = LocalDate.of(2023, 5, 1);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        String formattedDate = userInput.format(formatter);
-        System.out.println(formattedDate);
+        // identfy todays date (LocalDate)
+        //
+        LocalDate endDate = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate startDate = LocalDate.parse(endDate.getYear() + "-" + zeroPaddedMonthDay(endDate.getMonthValue())
+                + "-" + zeroPaddedMonthDay(1), formatter);
+        printEntries("all", startDate, endDate);
     }
 
     public void previousMonth() {
-        LocalDate userInput = LocalDate.of(2023, 3, 1);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        String formattedDate = userInput.format(formatter);
-        System.out.println(formattedDate);
+        LocalDate currentDate = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate previousMonthDate = currentDate.minusMonths(1);
+        LocalDate startDate = LocalDate.parse(previousMonthDate.getYear() + "-" + zeroPaddedMonthDay(previousMonthDate.getMonthValue())
+                + "-" + zeroPaddedMonthDay(1), formatter);
+        LocalDate endDate = LocalDate.parse(previousMonthDate.getYear() + "-" + zeroPaddedMonthDay(previousMonthDate.getMonthValue())
+                + "-" + zeroPaddedMonthDay(previousMonthDate.lengthOfMonth()), formatter);
+        printEntries("all", startDate, endDate);
 //        LocalDate latePayment = LocalDate.parse(userInput);
 //        return userInput;
     }
 
     public void previousYear() {
-        LocalDate userInput = LocalDate.of(2022, 10, 9);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        String formattedDate = userInput.format(formatter);
-        System.out.println(formattedDate);
+        LocalDate currentYear = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate previousYear = currentYear.minusYears(1);
+        LocalDate startDate = LocalDate.parse(previousYear.getYear() + "-" + zeroPaddedMonthDay(1) + "-" + zeroPaddedMonthDay(1));
+        LocalDate endDate = LocalDate.parse(previousYear.getYear() + "-" + zeroPaddedMonthDay(12) + "-" + zeroPaddedMonthDay(31));
+        printEntries("all", startDate, endDate);
     }
 
     public void yearToDate() {
-        LocalDate userInput = LocalDate.of(2023, 1, 19);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        String formattedDate = userInput.format(formatter);
-        System.out.println(formattedDate);
+        LocalDate endDate = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate startDate = LocalDate.parse(endDate.getYear() + "-" + zeroPaddedMonthDay(1) + "-" + zeroPaddedMonthDay(1));
+        printEntries("all", startDate, endDate);
     }
 
     public void searchByVendor() {
