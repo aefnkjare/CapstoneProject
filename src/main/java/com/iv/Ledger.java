@@ -281,9 +281,7 @@ public class Ledger {
                     previousYear();
                     break;
                 case "5":
-                    System.out.println("Please type the name of the vendor you would like to search up. \n Name: ");
-                    String userInput = scanner.next();
-
+                    searchByVendor();
                     break;
                 case "6":
                     System.out.println("I guess you can leave me all alone by myself then");
@@ -340,12 +338,43 @@ public class Ledger {
     }
 
     public void searchByVendor() {
-
-        Scanner scanner = new Scanner(System.in);
-
         System.out.println("Please type the name of the vendor you would like to search up. \n Name: ");
         String userInput = scanner.next();
 
+        try {
+            FileReader transactions = new FileReader("./src/main/java/com/iv/Transactions.txt");
+            BufferedReader bufferedReader = new BufferedReader(transactions);
+
+            String input;
+
+            while ((input = bufferedReader.readLine()) != null) {
+                /// input split ||
+                String[] splitInput = input.split(Pattern.quote("|"));
+
+                String date = splitInput[0];
+                String time = splitInput[1];
+                String description = splitInput[2];
+                String vendor = splitInput[3];
+                float amount = Float.parseFloat(splitInput[4]);
+
+                com.iv.Ledger ledgerItem = new com.iv.Ledger(date, time, description, vendor, amount); // [190, Madison Brown, 40, 17.50]
+
+                if (vendor.equalsIgnoreCase(userInput)) {
+
+                    System.out.printf("Item: %s, %s, %s, %s, $%.2f\n",
+                            ledgerItem.getDate(),
+                            ledgerItem.getTime(),
+                            ledgerItem.getDesc(),
+                            ledgerItem.getVendor(),
+                            ledgerItem.getAmount()
+                    );
+                }
+            }
+            bufferedReader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println("");
 //        String currentVendor = vendors
     }
 }
