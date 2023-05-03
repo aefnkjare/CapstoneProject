@@ -98,10 +98,10 @@ public class Ledger {
     }
 
     public void makePayment() {
-        System.out.println("Please provide the date of your deposit(yyyy-MM-DD): \n Answer: ");
+        System.out.println("Please provide the date of your payment(yyyy-MM-DD): \n Answer: ");
         String date = scanner.nextLine();
 
-        System.out.println("Please provide the time of your deposit(hh:MM:ss): \n Answer: ");
+        System.out.println("Please provide the time of your payment(hh:MM:ss): \n Answer: ");
         String time = scanner.nextLine();
 
         System.out.println("Please provide a description: \n Answer: ");
@@ -110,18 +110,18 @@ public class Ledger {
         System.out.println("Please provide the vendor: \n Answer: ");
         String vendor = scanner.nextLine();
 
-        System.out.println("Please provide the amount you are intending to deposit: \n Answer: ");
+        System.out.println("Please provide the amount you are intending to pay: \n Answer: ");
         String amount = scanner.nextLine();
         try {
             FileWriter depositFiles = new FileWriter("./src/main/java/com/iv/Transactions.txt", true);
             BufferedWriter bufferedWriter = new BufferedWriter(depositFiles);
 
-            bufferedWriter.write("\n" + date + "|" + time + "|" + desc + "|" + vendor + "|" + amount);
+            bufferedWriter.write("\n" + date + "|" + time + "|" + desc + "|" + vendor + "|" + "-" + amount);
 
-            System.out.println("Deposit successful!");
+            System.out.println("Payment successful!");
             bufferedWriter.close();
         } catch (IOException e) {
-            System.out.println("Deposit unsuccessful, error code 1053R");
+            System.out.println("Payment unsuccessful, error code 1053R");
             e.printStackTrace();
         }
     }
