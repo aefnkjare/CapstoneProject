@@ -43,7 +43,7 @@ public class Main {
                     System.out.println("Exiting the application.");
                     break;
                 default:
-                    System.out.println("Invalid input you Bozo, put in the right number next time.");
+                    System.out.println("Invalid input you Bozo, put in the right number next time.\n");
             }
         } while (!userInput.equalsIgnoreCase("4"));
     }

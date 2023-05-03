@@ -1,5 +1,7 @@
 package com.iv;
 
+import com.sun.jdi.InvalidTypeException;
+
 import java.io.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -91,27 +93,33 @@ public class Ledger {
 
             System.out.println("Deposit successful!");
             bufferedWriter.close();
-        } catch (IOException e) {
+        } catch (Exception e) {
             System.out.println("Deposit unsuccessful, error code 1053R");
             e.printStackTrace();
         }
     }
 
     public void makePayment() {
-        System.out.println("Please provide the date of your payment(yyyy-MM-DD): \n Answer: ");
-        String date = scanner.nextLine();
+        try {
+            System.out.println("Please provide the date of your payment(yyyy-MM-DD): \n Answer: ");
+            String date = scanner.nextLine();
 
-        System.out.println("Please provide the time of your payment(hh:MM:ss): \n Answer: ");
-        String time = scanner.nextLine();
+            System.out.println("Please provide the time of your payment(hh:MM:ss): \n Answer: ");
+            String time = scanner.nextLine();
 
-        System.out.println("Please provide a description: \n Answer: ");
-        String desc = scanner.nextLine();
+            System.out.println("Please provide a description: \n Answer: ");
+            String desc = scanner.nextLine();
 
-        System.out.println("Please provide the vendor: \n Answer: ");
-        String vendor = scanner.nextLine();
+            System.out.println("Please provide the vendor: \n Answer: ");
+            String vendor = scanner.nextLine();
 
-        System.out.println("Please provide the amount you are intending to pay: \n Answer: ");
-        String amount = scanner.nextLine();
+            System.out.println("Please provide the amount you are intending to pay: \n Answer: ");
+            Float amount = scanner.nextFloat();
+        } catch(Exception e){
+            if(true) {
+                System.out.println("Hey, you did something wrong. Please try again.");
+            }
+        }
         try {
             FileWriter depositFiles = new FileWriter("./src/main/java/com/iv/Transactions.txt", true);
             BufferedWriter bufferedWriter = new BufferedWriter(depositFiles);
@@ -150,7 +158,7 @@ public class Ledger {
                     depositEntries();
                     break;
                 case "3":
-                    negativeEntries();
+                    paymentEntries();
                     break;
                 case "4":
                     reports();
@@ -180,7 +188,7 @@ public class Ledger {
                 String vendor = splitInput[3];
                 float amount = Float.parseFloat(splitInput[4]);
 
-                com.iv.Ledger ledgerItem = new com.iv.Ledger(date, time, description, vendor, amount); // [190, Madison Brown, 40, 17.50]
+                Ledger ledgerItem = new Ledger(date, time, description, vendor, amount); // [190, Madison Brown, 40, 17.50]
 
                 if(filter.equals("negative")&&amount<0){
                     System.out.printf("Item: %s, %s, %s, %s, $%.2f\n",
@@ -241,7 +249,7 @@ public class Ledger {
             printEntries("all", null,null);
         }
 
-    public void negativeEntries() {
+    public void paymentEntries() {
         printEntries("negative",null, null);
     }
 
@@ -253,8 +261,6 @@ public class Ledger {
         String reportInput;
 
         Scanner scanner = new Scanner(System.in);
-
-        int totalNumOfVendors = 9;
 
         do {
             System.out.println("Please choose an option: ");
@@ -299,7 +305,7 @@ public class Ledger {
     }
 
     public void monthToDate() {
-        // identfy todays date (LocalDate)
+        // Identify today's date (LocalDate)
         //
         LocalDate endDate = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
