@@ -22,11 +22,6 @@ public class LedgerLine {
         this.vendor = vendor;
         this.amount = amount;
     }
-
-    public LedgerLine() {
-
-    }
-
     public String getDate() {
         return date;
     }
@@ -97,7 +92,6 @@ public class LedgerLine {
     }
 
     public void makePayment() {
-        try {
             System.out.println("Please provide the date of your payment(yyyy-MM-DD): \n Answer: ");
             String date = scanner.nextLine();
 
@@ -112,10 +106,6 @@ public class LedgerLine {
 
             System.out.println("Please provide the amount you are intending to pay: \n Answer: ");
             Float amount = scanner.nextFloat();
-        } catch(Exception e){
-                System.out.println("Hey, you did something wrong. Please try again.");
-                e.printStackTrace();
-        }
         try {
             FileWriter depositFiles = new FileWriter("./src/main/java/com/iv/Transactions.txt", true);
             BufferedWriter bufferedWriter = new BufferedWriter(depositFiles);
