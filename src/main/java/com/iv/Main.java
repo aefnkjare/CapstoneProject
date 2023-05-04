@@ -14,7 +14,7 @@ public class Main {
 
         String userInput;
 
-        Ledger ledger = new Ledger();
+        LedgerLine ledger = new LedgerLine();
 
         do {
             System.out.println("Please choose an option: ");

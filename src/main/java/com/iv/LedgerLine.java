@@ -113,9 +113,8 @@ public class LedgerLine {
             System.out.println("Please provide the amount you are intending to pay: \n Answer: ");
             Float amount = scanner.nextFloat();
         } catch(Exception e){
-            if(true) {
                 System.out.println("Hey, you did something wrong. Please try again.");
-            }
+                e.printStackTrace();
         }
         try {
             FileWriter depositFiles = new FileWriter("./src/main/java/com/iv/Transactions.txt", true);
