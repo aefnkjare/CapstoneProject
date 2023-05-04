@@ -1,12 +1,7 @@
 package com.iv;
 
-import java.io.*;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
-import java.util.regex.Pattern;
 
 public class Main {
     static Scanner scanner = new Scanner(System.in);
@@ -48,25 +43,3 @@ public class Main {
         } while (!userInput.equalsIgnoreCase("4"));
     }
 }
-
-
-//    public class Vendor {
-//        private String name;
-//
-//        public Vendor(String name) {
-//            this.name = name;
-//        }
-//
-//        public String getName() {
-//            return name;
-//        }
-//
-//        public void setName(String name) {
-//            this.name = name;
-//        }
-//    }
-
-
-
-//2023-04-15|10:13:25|ergonomic keyboard|Amazon|-89.50
-//2023-04-15|11:15:00|Invoice 1001 paid|Joe|1500.00

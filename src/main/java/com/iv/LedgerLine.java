@@ -1,15 +1,12 @@
 package com.iv;
 
-import com.sun.jdi.InvalidTypeException;
-
 import java.io.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
-public class Ledger {
+public class LedgerLine {
     Scanner scanner = new Scanner(System.in);
 
     public String date;
@@ -18,7 +15,7 @@ public class Ledger {
     public String vendor;
     public float amount;
 
-    public Ledger(String date, String time, String desc, String vendor, float amount) {
+    public LedgerLine(String date, String time, String desc, String vendor, float amount) {
         this.date = date;
         this.time = time;
         this.desc = desc;
@@ -26,7 +23,7 @@ public class Ledger {
         this.amount = amount;
     }
 
-    public Ledger() {
+    public LedgerLine() {
 
     }
 
@@ -188,7 +185,7 @@ public class Ledger {
                 String vendor = splitInput[3];
                 float amount = Float.parseFloat(splitInput[4]);
 
-                Ledger ledgerItem = new Ledger(date, time, description, vendor, amount); // [190, Madison Brown, 40, 17.50]
+                LedgerLine ledgerItem = new LedgerLine(date, time, description, vendor, amount); // [190, Madison Brown, 40, 17.50]
 
                 if(filter.equals("negative")&&amount<0){
                     System.out.printf("Item: %s, %s, %s, %s, $%.2f\n",
@@ -363,7 +360,7 @@ public class Ledger {
                 String vendor = splitInput[3];
                 float amount = Float.parseFloat(splitInput[4]);
 
-                com.iv.Ledger ledgerItem = new com.iv.Ledger(date, time, description, vendor, amount); // [190, Madison Brown, 40, 17.50]
+                LedgerLine ledgerItem = new LedgerLine(date, time, description, vendor, amount); // [190, Madison Brown, 40, 17.50]
 
                 if (vendor.equalsIgnoreCase(userInput)) {
 
