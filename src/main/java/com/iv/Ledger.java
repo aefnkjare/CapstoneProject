@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
-public class LedgerLine {
+public class Ledger {
     Scanner scanner = new Scanner(System.in);
 
     public String date;
@@ -15,13 +15,18 @@ public class LedgerLine {
     public String vendor;
     public float amount;
 
-    public LedgerLine(String date, String time, String desc, String vendor, float amount) {
+    public Ledger(String date, String time, String desc, String vendor, float amount) {
         this.date = date;
         this.time = time;
         this.desc = desc;
         this.vendor = vendor;
         this.amount = amount;
     }
+
+    public Ledger() {
+
+    }
+
     public String getDate() {
         return date;
     }
@@ -174,7 +179,7 @@ public class LedgerLine {
                 String vendor = splitInput[3];
                 float amount = Float.parseFloat(splitInput[4]);
 
-                LedgerLine ledgerItem = new LedgerLine(date, time, description, vendor, amount); // [190, Madison Brown, 40, 17.50]
+                Ledger ledgerItem = new Ledger(date, time, description, vendor, amount); // [190, Madison Brown, 40, 17.50]
 
                 if(filter.equals("negative")&&amount<0){
                     System.out.printf("Item: %s, %s, %s, %s, $%.2f\n",
@@ -349,7 +354,7 @@ public class LedgerLine {
                 String vendor = splitInput[3];
                 float amount = Float.parseFloat(splitInput[4]);
 
-                LedgerLine ledgerItem = new LedgerLine(date, time, description, vendor, amount); // [190, Madison Brown, 40, 17.50]
+                Ledger ledgerItem = new Ledger(date, time, description, vendor, amount); // [190, Madison Brown, 40, 17.50]
 
                 if (vendor.equalsIgnoreCase(userInput)) {
 
