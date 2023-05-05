@@ -7,7 +7,8 @@ Creating of the Main Menu
             System.out.println("\t 2: Make Payment");
             System.out.println("\t 3: Ledger Menu");
             System.out.println("\t 4: Exit");
-            userInput = scanner.nextLine(); ```
+            userInput = scanner.nextLine();
+            ```
 
 Creating of the Vendor Menu
 
