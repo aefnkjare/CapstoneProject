@@ -1,19 +1,19 @@
 # CapstoneProject
-Creating of the Main Menu
+```Creating of the Main Menu```
 
-```do {
+do {
             System.out.println("Please choose an option: ");
             System.out.println("\t 1: Add Deposit");
             System.out.println("\t 2: Make Payment");
             System.out.println("\t 3: Ledger Menu");
             System.out.println("\t 4: Exit");
-            userInput = scanner.nextLine()```
+            userInput = scanner.nextLine()
             
             
 
-Creating of the Vendor Menu
+```Creating of the Vendor Menu```
 
-```String ledgerInput;
+String ledgerInput;
 
         Scanner scanner = new Scanner(System.in);
 
@@ -47,11 +47,11 @@ Creating of the Vendor Menu
                     System.out.println("Invalid input you Bozo, put in the right number next time.");
             }
         } while (!ledgerInput.equalsIgnoreCase("5"));
-    } ```
+    }
 
-Creating the Reports Menu
+```Creating the Reports Menu```
 
-``` public void reports() {
+public void reports() {
         String reportInput;
 
         Scanner scanner = new Scanner(System.in);
@@ -90,4 +90,4 @@ Creating the Reports Menu
                     System.out.println("Invalid input you Bozo, put in the right name next time.");
             }
         } while (!reportInput.equalsIgnoreCase("6"));
-    } ```
+    }
